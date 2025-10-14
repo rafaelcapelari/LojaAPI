@@ -1,61 +1,50 @@
+using System;
 using LojaApi.Entities;
 
 namespace LojaApi.Repositories;
 
 public class ProdutoRepository
 {
-    private static List<Produto> _produtos = new List<Produto>
-    {
-        new Produto { Id = 1, Codigo = "123", Descricao = "Madeira", Estoque = 0 },
-        new Produto { Id = 2, Codigo = "456", Descricao = "Aluminio", Estoque = 2.7m },
-        new Produto { Id = 3, Codigo = "789", Descricao = "Papel", Estoque = 15 }
-    };
 
-    private static int _nextId = 4; // Variável para gerenciar o próximo ID 
+    private readonly List<Produto> _produtos = new List<Produto>
+        {
+            new Produto { Id = 1, Codigo = "123", Descricao = "Papel", Estoque = 123.56m },
+            new Produto { Id = 2, Codigo = "456", Descricao = "Cobre", Estoque = 50 },
+            new Produto { Id = 3, Codigo = "789", Descricao = "Silicio", Estoque = 1589.124m }
+        };
 
-    public static List<Produto> GetAll()
-    {
-        return _produtos;
-    }
+    private int _nextId = 4;
 
-    public static Produto? GetById(int id)
+    public List<Produto> ObterTodos() => _produtos;
+
+    public Produto? ObterPorId(int id)
     {
         return _produtos.FirstOrDefault(c => c.Id == id);
     }
-
-    public static Produto Add(Produto novoProduto)
+    public Produto Adicionar(Produto novoProduto)
     {
         novoProduto.Id = _nextId++;
         _produtos.Add(novoProduto);
         return novoProduto;
     }
-    
-    public static Produto? Update(int id, Produto produtoAtualizado)
+    public Produto? Atualizar(int id, Produto produtoAtualizado)
     {
-        var produtoExistente = _produtos.FirstOrDefault(c => c.Id == id);
-
-        if (produtoExistente == null)
-        {
-            return null; 
-        }
+        var produtoExistente = ObterPorId(id);
+        if (produtoExistente == null) return null;
 
         produtoExistente.Codigo = produtoAtualizado.Codigo;
         produtoExistente.Descricao = produtoAtualizado.Descricao;
-        produtoExistente.Estoque = produtoAtualizado.Estoque; 
+        produtoExistente.Estoque = produtoAtualizado.Estoque;
 
         return produtoExistente;
     }
 
-    public static bool Delete(int id)
+    public bool Remover(int id)
     {
-        var produtoParaDeletar = _produtos.FirstOrDefault(c => c.Id == id);
-
-        if (produtoParaDeletar == null)
-        {
-            return false;
-        }
+        var produtoParaDeletar = ObterPorId(id);
+        if (produtoParaDeletar == null) return false;
 
         _produtos.Remove(produtoParaDeletar);
         return true;
-    }
+    }    
 }

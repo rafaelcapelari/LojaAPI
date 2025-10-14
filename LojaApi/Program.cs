@@ -1,9 +1,37 @@
+// Program.cs
+using LojaApi.Data;
+using LojaApi.Repositories;
+using LojaApi.Repositories.Interfaces;
+using LojaApi.Services;
+using LojaApi.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Adiciona os serviços ao contêiner de injeção de dependência.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// >>>>> CONFIGURAÇÃO DA INJEÇÃO DE DEPENDÊNCIA (DI) <<<<<
+
+// 1. Configuração do DbContext com PostgreSQL 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
+builder.Services.AddDbContext<LojaContext>(options =>
+    options.UseNpgsql(connectionString));
+
+
+// 1. Registro do Serviço
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+
+// 2. Registro do Repositório
+//    Sempre que alguém (como o ClienteService) pedir a Interface IClienteRepository,
+//    entregue a implementação (mockada) ClienteRepository.
+builder.Services.AddScoped<IClienteRepository, ClienteDBRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoDBRepository>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaDBRepository>();
+
+// Configuração do Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,9 +45,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
