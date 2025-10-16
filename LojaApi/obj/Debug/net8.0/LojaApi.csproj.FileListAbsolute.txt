@@ -118,6 +118,7 @@ C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\LojaApi.As
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\LojaApi.csproj.CoreCompileInputs.cache
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\LojaApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\LojaApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\LojaApi.sourcelink.json
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\staticwebassets.development.json
 C:\Projetos\FormacaoDev\Modulo04 - API\Aula3\LojaApi\obj\Debug\net8.0\staticwebassets\msbuild.LojaApi.Microsoft.AspNetCore.StaticWebAssets.props
